@@ -1,8 +1,0 @@
-2026-06-09 15:13:37,253 [day08_orchestrator] INFO HTTP Request: POST http://127.0.0.1:11000/register "HTTP/1.1 200 OK"
-2026-06-09 15:13:37,254 [day08_orchestrator] INFO Registered with registry on attempt 1
-2026-06-09 15:13:37,257 [day08_orchestrator] INFO Day08 Orchestrator Agent listening on port 11011
-INFO:     Started server process [15696]
-INFO:     Waiting for application startup.
-INFO:     Application startup complete.
-INFO:     Uvicorn running on http://0.0.0.0:11011 (Press CTRL+C to quit)
-2026-06-09 15:13:38,017 [day08_orchestrator] WARNING Deprecated agent card endpoint '/.well-known/agent.json' accessed. Please use '/.well-known/agent-card.json' instead. This endpoint will be removed in a future version.

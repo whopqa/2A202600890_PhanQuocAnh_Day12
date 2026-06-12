@@ -5,7 +5,7 @@
 .env.*
 !.env.example
 
-# ── Python ──────────────────────────��────────────────────
+# ── Python ───────────────────────────────────────────────
 __pycache__/
 *.pyc
 *.pyo
@@ -21,7 +21,7 @@ venv/
 env/
 .venv/
 
-# ── IDE ──────────────────────────────��────────────────────
+# ── IDE ──────────────────────────────────────────────────
 .vscode/
 .idea/
 *.swp
@@ -31,6 +31,16 @@ env/
 .DS_Store
 Thumbs.db
 
-# ── Docker volumes (local dev) ─────────────────────��──────
+# ── Docker volumes (local dev) ────────────────────────────
 data/
 volumes/
+
+# ── Runtime logs / temp files ─────────────────────────────
+.run/
+**/.run/
+*.log
+
+# ── Lab_Assigment junction (local Python import alias) ────
+# This is a Windows junction pointing to 06-lab-complete/
+# It must NOT be tracked by git — code lives in 06-lab-complete/
+Lab_Assigment/
