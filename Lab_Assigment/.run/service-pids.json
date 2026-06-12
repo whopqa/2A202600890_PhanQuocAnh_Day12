@@ -1,0 +1,32 @@
+[
+  {
+    "Name": "day08_registry",
+    "ModuleName": "agent_day08.day08_registry",
+    "Pid": 32276
+  },
+  {
+    "Name": "day08_legal_rag",
+    "ModuleName": "agent_day08.day08_legal_rag_agent",
+    "Pid": 12400
+  },
+  {
+    "Name": "day08_news_rag",
+    "ModuleName": "agent_day08.day08_news_rag_agent",
+    "Pid": 6520
+  },
+  {
+    "Name": "day08_orchestrator",
+    "ModuleName": "agent_day08.day08_orchestrator_agent",
+    "Pid": 41452
+  },
+  {
+    "Name": "day08_customer",
+    "ModuleName": "agent_day08.day08_customer_agent",
+    "Pid": 40472
+  },
+  {
+    "Name": "day08_ui",
+    "ModuleName": "agent_day08.day08_ui",
+    "Pid": 39716
+  }
+]

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day08 Legal RAG UI</title>
+  <link rel="stylesheet" href="/assets/app.css?v=day08-ui-trace-v3">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-block">
+      <p class="eyebrow">A2A Legal RAG Playground</p>
+      <h1>Day08 chatbot tu van phap ly</h1>
+      <p class="subtle">Theo doi tuyen xu ly customer -> orchestrator -> legal/news specialists tren cung corpus Day 8.</p>
+    </div>
+    <div class="topbar-actions">
+      <button id="refresh-status" type="button">Refresh status</button>
+      <button id="reset-session" type="button">New thread</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <section class="panel">
+        <div class="panel-heading">
+          <h2>Service status</h2>
+          <span id="status-summary" class="subtle">Dang kiem tra...</span>
+        </div>
+        <div id="service-status" class="status-list"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <h2>LLM runtime</h2>
+          <span id="runtime-summary" class="subtle">Dang tai...</span>
+        </div>
+        <div id="runtime-info" class="runtime-info"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <h2>Prompt goi y</h2>
+          <span class="subtle">Nhan de doan hoi nhanh</span>
+        </div>
+        <div id="prompt-list" class="prompt-list"></div>
+      </section>
+    </aside>
+
+    <section class="chat-shell">
+      <div id="chat-log" class="chat-log" aria-live="polite"></div>
+      <section class="trace-band">
+        <div class="trace-column">
+          <div class="panel-heading">
+            <h2>Stage 4 logs</h2>
+            <span id="trace-id-pill" class="subtle">Trace chua tao</span>
+          </div>
+          <p class="trace-caption">Logic graph va phan tong hop noi bo.</p>
+          <div id="stage4-log" class="trace-list"></div>
+        </div>
+        <div class="trace-column">
+          <div class="panel-heading">
+            <h2>Stage 5 logs</h2>
+            <span class="subtle">A2A va service calls</span>
+          </div>
+          <p class="trace-caption">Dieu phoi giua UI, registry va cac agent.</p>
+          <div id="stage5-log" class="trace-list"></div>
+        </div>
+      </section>
+      <form id="chat-form" class="composer">
+        <label class="composer-label" for="question">Cau hoi</label>
+        <textarea
+          id="question"
+          name="question"
+          rows="4"
+          maxlength="4000"
+          placeholder="Nhap cau hoi phap ly, tin tuc, hoac cau hoi ket hop..."
+          required
+        ></textarea>
+        <div class="composer-footer">
+          <div id="session-pill" class="session-pill"></div>
+          <button id="send-button" type="submit">Gui cau hoi</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <template id="message-template">
+    <article class="message">
+      <div class="message-meta">
+        <span class="message-role"></span>
+        <span class="message-detail"></span>
+      </div>
+      <div class="message-body"></div>
+    </article>
+  </template>
+
+  <script src="/assets/app.js?v=day08-ui-trace-v3" defer></script>
+</body>
+</html>

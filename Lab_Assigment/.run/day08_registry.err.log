@@ -1,0 +1,9 @@
+2026-06-09 15:13:28,723 [day08_registry] INFO Starting Day08 registry on port 11000
+INFO:     Started server process [42208]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:11000 (Press CTRL+C to quit)
+2026-06-09 15:13:31,046 [day08_registry] INFO Registered day08-legal-rag-agent at http://127.0.0.1:11012
+2026-06-09 15:13:34,012 [day08_registry] INFO Registered day08-news-rag-agent at http://127.0.0.1:11013
+2026-06-09 15:13:37,225 [day08_registry] INFO Registered day08-orchestrator-agent at http://127.0.0.1:11011
+2026-06-09 15:13:39,171 [day08_registry] INFO Registered day08-customer-agent at http://127.0.0.1:11010

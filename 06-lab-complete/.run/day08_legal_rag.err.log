@@ -1,0 +1,8 @@
+2026-06-09 15:13:31,046 [day08_legal_rag] INFO HTTP Request: POST http://127.0.0.1:11000/register "HTTP/1.1 200 OK"
+2026-06-09 15:13:31,055 [day08_legal_rag] INFO Registered with registry on attempt 1
+2026-06-09 15:13:31,056 [day08_legal_rag] INFO Day08 Legal RAG Agent listening on port 11012
+INFO:     Started server process [39112]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:11012 (Press CTRL+C to quit)
+2026-06-09 15:13:31,889 [day08_legal_rag] WARNING Deprecated agent card endpoint '/.well-known/agent.json' accessed. Please use '/.well-known/agent-card.json' instead. This endpoint will be removed in a future version.

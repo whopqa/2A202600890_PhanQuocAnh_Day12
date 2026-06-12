@@ -1,0 +1,8 @@
+2026-06-09 15:13:39,174 [day08_customer_agent] INFO HTTP Request: POST http://127.0.0.1:11000/register "HTTP/1.1 200 OK"
+2026-06-09 15:13:39,174 [day08_customer_agent] INFO Registered with registry on attempt 1
+2026-06-09 15:13:39,176 [day08_customer_agent] INFO Day08 Customer Agent listening on port 11010
+INFO:     Started server process [33496]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:11010 (Press CTRL+C to quit)
+2026-06-09 15:13:39,554 [day08_customer_agent] WARNING Deprecated agent card endpoint '/.well-known/agent.json' accessed. Please use '/.well-known/agent-card.json' instead. This endpoint will be removed in a future version.
