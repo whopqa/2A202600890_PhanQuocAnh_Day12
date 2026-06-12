@@ -1,100 +1,94 @@
-# Lab 12 — Complete Production Agent
+# Lab 12 - Complete Production Agent
 
-Kết hợp TẤT CẢ những gì đã học trong 1 project hoàn chỉnh.
+This folder contains the final production-ready agent for Day 12. It combines the lab requirements into one deployable FastAPI service.
 
-## Checklist Deliverable
+## What Is Included
 
-- [x] Dockerfile (multi-stage, < 500 MB)
-- [x] docker-compose.yml (agent + redis)
-- [x] .dockerignore
-- [x] Health check endpoint (`GET /health`)
-- [x] Readiness endpoint (`GET /ready`)
-- [x] API Key authentication
-- [x] Rate limiting
-- [x] Cost guard
-- [x] Config từ environment variables
-- [x] Structured logging
-- [x] Graceful shutdown
-- [x] Public URL ready (Railway / Render config)
+- Multi-stage Dockerfile with a non-root runtime user
+- Docker Compose stack with Nginx, scalable agent replicas, and Redis
+- Render deployment blueprint with managed Redis
+- API key authentication through `X-API-Key`
+- Redis sliding-window rate limiting: 10 requests/minute/user
+- Redis monthly cost guard: 10 USD/month/user
+- Redis-backed conversation history
+- `/health` liveness and `/ready` readiness endpoints
+- Structured JSON logging and graceful shutdown cleanup
+- Mock LLM, so no real OpenAI key is required for the lab
 
----
-
-## Cấu Trúc
-
-```
-06-lab-complete/
-├── app/
-│   ├── main.py         # Entry point — kết hợp tất cả
-│   ├── config.py       # 12-factor config
-│   ├── auth.py         # API Key + JWT
-│   ├── rate_limiter.py # Rate limiting
-│   └── cost_guard.py   # Budget protection
-├── Dockerfile          # Multi-stage, production-ready
-├── docker-compose.yml  # Full stack
-├── railway.toml        # Deploy Railway
-├── render.yaml         # Deploy Render
-├── .env.example        # Template
-├── .dockerignore
-└── requirements.txt
-```
-
----
-
-## Chạy Local
+## Local Setup
 
 ```bash
-# 1. Setup
-cp .env.example .env
-
-# 2. Chạy với Docker Compose
-docker compose up
-
-# 3. Test
-curl http://localhost/health
-
-# 4. Lấy API key từ .env, test endpoint
-API_KEY=$(grep AGENT_API_KEY .env | cut -d= -f2)
-curl -H "X-API-Key: $API_KEY" \
-     -X POST http://localhost/ask \
-     -H "Content-Type: application/json" \
-     -d '{"question": "What is deployment?"}'
+cd 06-lab-complete
+copy .env.example .env.local
 ```
 
----
+Edit `.env.local` and set:
 
-## Deploy Railway (< 5 phút)
+```env
+AGENT_API_KEY=local-secret-key
+JWT_SECRET=local-jwt-secret
+```
+
+## Run With Docker Compose
 
 ```bash
-# Cài Railway CLI
-npm i -g @railway/cli
-
-# Login và deploy
-railway login
-railway init
-railway variables set OPENAI_API_KEY=sk-...
-railway variables set AGENT_API_KEY=your-secret-key
-railway up
-
-# Nhận public URL!
-railway domain
+docker compose up --build
 ```
 
----
+The Nginx entrypoint is available on:
 
-## Deploy Render
+```text
+http://localhost:8000
+```
 
-1. Push repo lên GitHub
-2. Render Dashboard → New → Blueprint
-3. Connect repo → Render đọc `render.yaml`
-4. Set secrets: `OPENAI_API_KEY`, `AGENT_API_KEY`
-5. Deploy → Nhận URL!
+## Test Commands
 
----
+```bash
+curl http://localhost:8000/health
+curl http://localhost:8000/ready
+```
 
-## Kiểm Tra Production Readiness
+Authentication should fail without a key:
+
+```bash
+curl -X POST http://localhost:8000/ask ^
+  -H "Content-Type: application/json" ^
+  -d "{\"user_id\":\"test\",\"question\":\"Hello\"}"
+```
+
+Authenticated request:
+
+```bash
+curl -X POST http://localhost:8000/ask ^
+  -H "X-API-Key: local-secret-key" ^
+  -H "Content-Type: application/json" ^
+  -d "{\"user_id\":\"test\",\"question\":\"Hello\"}"
+```
+
+View conversation history:
+
+```bash
+curl http://localhost:8000/history/test -H "X-API-Key: local-secret-key"
+```
+
+## Scale Locally
+
+```bash
+docker compose up --build --scale agent=3
+```
+
+Nginx continues to expose one stable URL at `http://localhost:8000` while routing to the agent replicas.
+
+## Production Readiness Check
 
 ```bash
 python check_production_ready.py
 ```
 
-Script này kiểm tra tất cả items trong checklist và báo cáo những gì còn thiếu.
+## Render Deployment
+
+1. Push this repository to GitHub.
+2. In Render, choose **New > Blueprint**.
+3. Select the repository and let Render read `06-lab-complete/render.yaml`.
+4. Confirm generated secrets and deploy.
+5. Test `/health`, `/ready`, and `/ask` using the commands in the root `DEPLOYMENT.md`.
