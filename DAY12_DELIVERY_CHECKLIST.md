@@ -6,6 +6,7 @@
 ### 2. Project - Lab Assiggment
   - Repalce project hiện tại trong 06-lab-complete bằng dự án cá nhân/nhóm là 1 trong các Agent ở các buổi trước.
   - Restructure code áp dụng các step để productionization cho dự án này, deploy và noted api url link
+    - **API URL (Railway):** https://2a202600890phanquocanhday12-production.up.railway.app
 
 p/s: Thời hạn nộp bài: trước 24h ngày 12/6/2026
 
